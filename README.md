@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/logo.png" alt="Monolith Industries" width="120">
   <h1>MONOLITH INDUSTRIES</h1>
-  <p><strong>Enterprise-grade Next.js infrastructure for one person.</strong></p>
+  <p><strong>Highly-opinionated, enterprise-grade Next.js infrastructure for one person.</strong></p>
   <p>
     <a href="#quick-start">Get Started</a> &middot;
     <a href="#whats-included">What's Included</a> &middot;
