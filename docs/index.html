@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONOLITH INDUSTRIES</title>
+  <meta name="description" content="Enterprise-grade Next.js infrastructure for one person.">
+  <meta property="og:title" content="MONOLITH INDUSTRIES">
+  <meta property="og:description" content="Enterprise-grade Next.js infrastructure for one person.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cream: #f5f3ef;
+      --ink: #1a1a1a;
+      --gray-400: #9c9c9c;
+      --gray-300: #b8b8b8;
+      --gray-200: #d4d4d4;
+      --gray-100: #e8e6e2;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ─── Layout ─── */
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    /* ─── Nav ─── */
+
+    nav {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gray-400);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    /* ─── Hero ─── */
+
+    .hero {
+      padding: 120px 0 96px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 40px;
+      border-radius: 50%;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      margin-bottom: 32px;
+    }
+
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 400;
+      color: var(--gray-400);
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.5;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Buttons ─── */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--ink);
+    }
+
+    /* ─── Divider ─── */
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 0;
+    }
+
+    /* ─── What It Is ─── */
+
+    .what {
+      text-align: center;
+    }
+
+    .what-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .what p {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--ink);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ─── Principles ─── */
+
+    .principles-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .principle h3 {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .principle p {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ─── Stack ─── */
+
+    .stack {
+      text-align: center;
+    }
+
+    .stack-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 32px;
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .stack-item {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    /* ─── For Who ─── */
+
+    .for-who {
+      text-align: center;
+    }
+
+    .for-who-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .for-who h2 {
+      font-family: var(--sans);
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .for-who p {
+      font-size: 17px;
+      color: var(--gray-400);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .use-cases {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .use-case {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink);
+      padding: 12px 20px;
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+    }
+
+    /* ─── CTA ─── */
+
+    .cta {
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    .cta-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .cta h2 {
+      font-family: var(--sans);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      font-size: 17px;
+      color: var(--gray-400);
+      margin-bottom: 40px;
+    }
+
+    .cta .hero-ctas {
+      margin-bottom: 24px;
+    }
+
+    .cta-note {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray-300);
+    }
+
+    /* ─── Footer ─── */
+
+    footer {
+      border-top: 1px solid var(--gray-200);
+      padding: 32px 0;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    /* ─── Responsive ─── */
+
+    @media (max-width: 768px) {
+      section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        padding: 80px 0 64px;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .cta {
+        padding: 80px 0;
+      }
+
+      footer .container {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-brand">Monolith Industries</a>
+      <div class="nav-links">
+        <a href="https://github.com/josheche/monolith-industries">GitHub</a>
+        <a href="https://github.com/josheche/monolith-industries#quick-start">Docs</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-logo">
+        <!-- Your logo/mark goes here -->
+      </div>
+      <p class="hero-label">Est. 2026 &mdash; One Employee</p>
+      <h1>MONOLITH<br>INDUSTRIES</h1>
+      <p class="hero-sub">Enterprise-grade Next.js infrastructure for one person.</p>
+      <div class="hero-ctas">
+        <a href="https://github.com/josheche/monolith-industries" class="btn btn-primary">
+          View on GitHub
+        </a>
+        <a href="https://github.com/josheche/monolith-industries#quick-start" class="btn btn-secondary">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- What It Is -->
+  <section class="what">
+    <div class="container">
+      <p class="what-label">The Product</p>
+      <p>
+        A reusable Next.js starter template with auth, database, background jobs,
+        error monitoring, analytics, and a design system. All wired up. No ceremony.
+        Clone it, add your tables, ship your product.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Principles -->
+  <section>
+    <div class="container">
+      <p class="principles-label">Operating Principles</p>
+      <div class="principles-grid">
+        <div class="principle">
+          <h3>Opinionated Defaults</h3>
+          <p>Every tool has been chosen, configured, and tested together. You inherit decisions that took longer to make than the code took to write.</p>
+        </div>
+        <div class="principle">
+          <h3>Serious Scaffolding</h3>
+          <p>Supabase Auth with OTP. Drizzle ORM with migrations. Sentry with session replay. pg-boss for background jobs. Not a toy.</p>
+        </div>
+        <div class="principle">
+          <h3>Minimal Ceremony</h3>
+          <p>No monorepo. No microservices. No abstraction layers you have to learn before you can build. Two processes. One database. Ship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Stack -->
+  <section class="stack">
+    <div class="container">
+      <p class="stack-label">Infrastructure</p>
+      <div class="stack-list">
+        <span class="stack-item">Next.js 16</span>
+        <span class="stack-item">TypeScript</span>
+        <span class="stack-item">Tailwind v4</span>
+        <span class="stack-item">shadcn/ui</span>
+        <span class="stack-item">Supabase</span>
+        <span class="stack-item">Drizzle ORM</span>
+        <span class="stack-item">pg-boss</span>
+        <span class="stack-item">Sentry</span>
+        <span class="stack-item">Vercel Analytics</span>
+        <span class="stack-item">Playwright</span>
+        <span class="stack-item">Vitest</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- For Who -->
+  <section class="for-who">
+    <div class="container">
+      <p class="for-who-label">Personnel</p>
+      <h2>Built for one person.</h2>
+      <p>
+        The entire organizational chart. Engineering, design, ops, QA, and executive leadership. All one person. This is their infrastructure.
+      </p>
+      <div class="use-cases">
+        <span class="use-case">Side projects</span>
+        <span class="use-case">Client work</span>
+        <span class="use-case">Startup MVPs</span>
+        <span class="use-case">Solo SaaS</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <p class="cta-label">Deployment</p>
+      <h2>Begin operations.</h2>
+      <p>Clone the repository. Start local Supabase. Build something.</p>
+      <div class="hero-ctas">
+        <a href="https://github.com/josheche/monolith-industries" class="btn btn-primary">
+          View on GitHub
+        </a>
+        <a href="https://github.com/josheche/monolith-industries#quick-start" class="btn btn-secondary">
+          Read the Docs
+        </a>
+      </div>
+      <p class="cta-note">MIT License. No vendor lock-in. No enterprise sales calls.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <span class="footer-brand">Monolith Industries &copy; 2026</span>
+      <div class="footer-links">
+        <a href="https://github.com/josheche/monolith-industries">GitHub</a>
+        <a href="https://github.com/josheche/monolith-industries#quick-start">Docs</a>
+        <a href="https://github.com/josheche/monolith-industries/blob/main/LICENSE">License</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
